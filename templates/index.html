@@ -46,7 +46,7 @@
                 url:'/get_states',
             })
             .done(function(data){
-                data = data['states'];
+                var data = data['states'];
                 // create a collapsable table for states
                 var table = '<table class="collapsable">';
                 table += '<tr>';
@@ -57,7 +57,7 @@
                 console.log(data.length);
                 for(var i = 0; i < data.length; i++){
                     table += '<tr>';
-                    table += '<td> <button onclick="expand_state({{ data['cities'][i][1] }}, this)">➕</button> </td>';
+                    table += '<td> <button onclick="expand_state('+data[i][0]+', this)">➕</button> </td>';
                     table += '<td>'+ (i+1) +'</td>';
                     table += '<td>'+ data[i][2] +'</td>';
                     table += '</tr>';
