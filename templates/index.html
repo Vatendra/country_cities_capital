@@ -23,7 +23,7 @@
         </tr>
         {% for country in data %}
             <tr>
-                <td> <button onclick="expand({{ country[0] }})">➕</button> </td>
+                <td> <button onclick="expand({{ country[0] }}, this)">➕</button> </td>
                 <td>{{ loop.index }}</td>
                 <td>{{ country[1] +'    '+country[3] }}</td>
                 <td>{{ country[10] }}</td>
@@ -35,10 +35,75 @@
         {% endfor %}
     </table>
     <script>
-            function expand(country_id){
+            function expand(country_id, button){
             console.log(country_id);
             // ajax call to get states for a country
+            $.ajax({
+                data:{
+                    'country_id': country_id
+                },
+                type:'POST',
+                url:'/get_states',
+            })
+            .done(function(data){
+                data = data['states'];
+                // create a collapsable table for states
+                var table = '<table class="collapsable">';
+                table += '<tr>';
+                table += '<th></th>';
+                table += '<th>S/n</th>';
+                table += '<th>State</th>';
+                table += '</tr>';
+                console.log(data.length);
+                for(var i = 0; i < data.length; i++){
+                    table += '<tr>';
+                    table += '<td> <button onclick="expand_state({{ data['cities'][i][1] }}, this)">➕</button> </td>';
+                    table += '<td>'+ (i+1) +'</td>';
+                    table += '<td>'+ data[i][2] +'</td>';
+                    table += '</tr>';
+                }
+                table += '</table>';
+                table = '<tr>' + table + '</tr>';
+                // append the table to the main table
+                $(button).parent().parent().after(table);
 
+            });
+            // prevent multiple clicks
+        }
+    </script>
+    <script>
+        function expand_state(country_id, button){
+            console.log(country_id);
+            // ajax call to get states for a country
+            $.ajax({
+                data:{
+                    'state_id': country_id
+                },
+                type:'POST',
+                url:'/get_cities',
+            })
+            .done(function(data){
+                data = data['cities'];
+                // create a collapsable table for states
+                var table = '<table class="collapsable">';
+                table += '<tr>';
+                table += '<th>S/n</th>';
+                table += '<th>City</th>';
+                table += '</tr>';
+                console.log(data.length);
+                for(var i = 0; i < data.length; i++){
+                    table += '<tr>';
+                    table += '<td>'+ (i+1) +'</td>';
+                    table += '<td>'+ data[i][1] +'</td>';
+                    table += '</tr>';
+                }
+                table += '</table>';
+                table = '<tr>' + table + '</tr>';
+                // append the table to the main table
+                $(button).parent().parent().after(table);
+
+            });
+            // prevent multiple clicks
         }
     </script>
 </body>

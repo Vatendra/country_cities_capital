@@ -111,7 +111,7 @@ class Database:
             for state in country['states']:
                 state_tuple = (
                     state['id'],
-                    country_id,
+                    country['id'],
                     state['name'],
                     state['state_code'],
                     state['latitude'],
@@ -140,8 +140,8 @@ class Database:
                     city_tuple = (
                         city['id'],
                         city['name'],
-                        country_id,
-                        state_id,
+                        country['id'],
+                        state['id'],
                         city['latitude'],
                         city['longitude']
                     )
@@ -176,14 +176,19 @@ class Database:
 
     def get_state_data(self, country_id):
         """Get state data from MySQL database."""
-        self.cursor.execute('''
-            SELECT * FROM cities_db.states where country_id = %d
-        ''') % country_id
+        country_id = int(country_id)
+        query = '''
+            SELECT * FROM cities_db.states WHERE country_id = %d
+        ''' % country_id
+        print(query)
+        self.cursor.execute(query)
         return self.cursor.fetchall()
 
-    def get_city_data(self,country_id, state_id):
+    def get_city_data(self, state_id):
         """Get city data from MySQL database."""
-        self.cursor.execute('''
-            SELECT * FROM cities_db.cities where country_id = %d and state_id = %d
-        ''') % (country_id, state_id)
+        state_id = int(state_id)
+        query = '''
+            SELECT * FROM cities_db.cities WHERE state_id = %d
+        ''' % state_id
+        self.cursor.execute(query)
         return self.cursor.fetchall()

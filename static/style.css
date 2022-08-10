@@ -9,10 +9,12 @@ table{
 table tr td{
     border: 1px solid #ccc;
     padding: 5px;
+    background: whitesmoke;
 }
 table tr th{
     border: 1px solid #ccc;
     padding: 5px;
+    background: lawngreen;
 }
 .pagination{
     margin: 0;
@@ -20,6 +22,31 @@ table tr th{
 .pagination li{
     display: inline;
 }
+/* Collapsable Table */
+.collapse{
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 10px;
+}
+.collapse table{
+    border-collapse: collapse;
+    margin: 0;
+    width: 100%;
+}
+.collapse table tr td{
+    border: 1px solid #ccc;
+    padding: 5px;
+    background: #cccccc;
+
+}
+.collapse table tr th{
+    border: 1px solid #ccc;
+    padding: 5px;
+    background: greenyellow;
+}
+
+
+
 /* Heading with horizontal line */
 h1{
     font-size: 20px;

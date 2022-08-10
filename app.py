@@ -10,14 +10,22 @@ def home():  # put application's code here
     return render_template('index.html', data=data)
 
 
-@app.route('/get_states')
-def country(country_id):
+@app.route('/get_states', methods=['POST'])
+def country():
     # retrieve data from POST
     country_id = request.form['country_id']
     # get state data
     data = db.get_state_data(country_id)
-    print('data:', data)
-    return render_template('index.html', data=data)
+    return {'states': data}
+
+
+@app.route('/get_cities', methods=['POST'])
+def state():
+    # retrieve data from POST
+    state_id = request.form['state_id']
+    # get city data
+    data = db.get_city_data(state_id)
+    return {'cities': data}
 
 
 if __name__ == '__main__':
