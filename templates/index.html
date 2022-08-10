@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Ajax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+</head>
+<body>
+
+    <!-- Countries Table -->
+    <table>
+        <tr>
+            <th></th>
+            <th>S/n</th>
+            <th>Country</th>
+            <th>Capital</th>
+            <th>Flag</th>
+            <th>Currency</th>
+        </tr>
+        {% for country in data %}
+            <tr>
+                <td> <button onclick="expand({{ country[0] }})">➕</button> </td>
+                <td>{{ loop.index }}</td>
+                <td>{{ country[1] +'    '+country[3] }}</td>
+                <td>{{ country[10] }}</td>
+                <td>{{ country[16] }}</td>
+                <td>{{ country[6] +' '+ country[8] }}</td>
+            </tr>
+            <!-- Nested collapsable tables for states -->
+
+        {% endfor %}
+    </table>
+    <script>
+            function expand(country_id){
+            console.log(country_id);
+            // ajax call to get states for a country
+
+        }
+    </script>
+</body>
+</html>

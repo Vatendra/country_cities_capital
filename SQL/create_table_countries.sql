@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS cities_db.countries (
+    id INTEGER PRIMARY KEY,
+    country_name VARCHAR(64) NOT NULL,
+    iso3 VARCHAR(3) NOT NULL,
+    iso2 VARCHAR(2) NOT NULL,
+    numeric_code VARCHAR(3) NOT NULL,
+    phone_code VARCHAR(16) NOT NULL,
+    currency_code VARCHAR(3) NOT NULL,
+    currency_name VARCHAR(64) NOT NULL,
+    currency_symbol VARCHAR(8) NOT NULL,
+    tld VARCHAR(3) NOT NULL,
+    capital VARCHAR(64) NOT NULL,
+    region VARCHAR(64) NOT NULL,
+    subregion VARCHAR(64) NOT NULL,
+    native_name VARCHAR(64) NOT NULL,
+    latitude VARCHAR(16) NOT NULL,
+    longitude VARCHAR(16) NOT NULL,
+    emoji VARCHAR(16) NOT NULL,
+    emojiU VARCHAR(16) NOT NULL
+);
